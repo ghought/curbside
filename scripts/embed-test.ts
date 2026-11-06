@@ -8,11 +8,14 @@ import { chromium, type BrowserContext, type Frame, type Page } from 'playwright
 const DIST = new URL('../dist/', import.meta.url).pathname;
 const SUB = '/games/curbside/';
 const ORIGIN = 'https://game.curbside.test';
-const GAME = `${ORIGIN}${SUB}`;
+// Set GAME_URL to test a real deployment instead of the local build.
+const LIVE = process.env.GAME_URL;
+const GAME = LIVE ?? `${ORIGIN}${SUB}`;
 const TYPES: Record<string, string> = { '.html': 'text/html', '.js': 'text/javascript', '.css': 'text/css', '.svg': 'image/svg+xml', '.woff2': 'font/woff2', '.woff': 'font/woff' };
 
 /** Serves dist/ from a subpath on a separate https origin, like a real game host. */
 async function serveGame(ctx: BrowserContext) {
+  if (LIVE) return;
   await ctx.route(`${ORIGIN}/**`, (route) => {
     const path = new URL(route.request().url()).pathname;
     if (!path.startsWith(SUB)) return route.fulfill({ status: 404 });

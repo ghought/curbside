@@ -19,7 +19,7 @@ npm run dev
 | `npm run build` | Type-checks, then builds static files to `dist/` |
 | `npm run solve` | Brute-forces every delivery with the real physics. `-- --write` updates `src/levels/par.json`, which sets the star thresholds. `-- --map` prints an outcome map |
 | `npm run verify` | Proves the preview matches the throw, throws are deterministic, mirrored levels are true mirrors, and a year of daily routes is solvable. About 3 minutes. `DAYS=730` checks more |
-| `npm run test:embed` | Runs the production build in a sandboxed iframe on the arcade origin and drives the whole bridge. Needs a build and installed Chrome |
+| `npm run test:embed` | Runs the production build in a sandboxed iframe on the arcade origin and drives the whole bridge. Needs a build and installed Chrome. Set `GAME_URL` to test a live deployment instead |
 | `npx tsx scripts/replay.ts <outdir>` | Plays a winning throw for all 15 deliveries through the live game and checks it scores what the solver said. Needs the dev server on port 5199 |
 
 Pushing to `main` deploys to GitHub Pages through
